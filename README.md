@@ -84,12 +84,11 @@ The system is composed of the following microservices:
 - User authentication and authorization
 - Event creation and management
 - Secure ticket purchasing
-- Automated email/SMS notifications
+- Automated email notifications after each purchase or cancel
 - Payment processing
 - Ticket validation
 - User purchase history
 - Admin dashboard
-- Event analytics
 
 ## Prerequisites
 
@@ -100,20 +99,20 @@ The system is composed of the following microservices:
 ## Installation
 
 1. Clone the repository:
-\`\`\`bash
-git clone [repository-url]
+```bash
+git clone https://github.com/chabbasaad/Events_Microservices &&
 cd laravel_Microservices
-\`\`\`
+```
 
 2. Build and start the containers:
-\`\`\`bash
+```bash
 docker-compose up -d
-\`\`\`
+```
 
-3. Initialize the databases (this will run migrations and seeders):
-\`\`\`bash
-./init-services.sh
-\`\`\`
+3. run command for Queue work for notification
+```bash
+php artisan queue:work
+```
 
 ## Service URLs
 
@@ -127,8 +126,11 @@ docker-compose up -d
 
 ## API Documentation
 
-Each service has its own Swagger/OpenAPI documentation available at:
-\`http://localhost:{PORT}/api/documentation\`
+API documentation is available at the following URLs:
+- Auth Service: http://localhost:8001/docs/api
+- User Service: http://localhost:8002/docs/api
+- Event Service: http://localhost:8003/docs/api
+- Ticket Service: http://localhost:8004/docs/api
 
 ## Security Features
 
@@ -147,24 +149,15 @@ Each service has its own Swagger/OpenAPI documentation available at:
 - Transaction rollback for failed purchases
 - Automatic retry mechanism for failed notifications
 
-## Monitoring and Logs
+## Logs
 
-- Each service maintains its own logs at \`storage/logs/laravel.log\`
-- Centralized logging system for debugging
-- Real-time error monitoring
-- Performance metrics tracking
+- Each service maintains its own logs at `storage/logs/laravel.log`
+
 
 ## Testing
 
 To run tests for all services:
-\`\`\`bash
+```bash
 ./run-tests.sh
-\`\`\`
+```
 
-## Contributing
-
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details
