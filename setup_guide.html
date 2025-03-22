@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Event Ticketing System - Setup Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+        * {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        body {
+            color: rgb(223, 223, 223);
+            background: #000;
+            padding-inline: 40px;
+            padding-block: 20px;
+        }
+        h1, h2, h3 {
+            color: #73ff33;
+        }
+        h3 {
+            color: #73ff33;
+        }
+        h1 {
+            border-bottom: 1px solid #73ff3342;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+        p, li {
+            color: #aaaaaa;
+        }
+        ul {
+            list-style: square;
+            margin-left: 20px;
+        }
+        ol {
+            list-style: decimal;
+            margin-left: 20px;
+        }
+        code {
+            padding: 2px 4px;
+            border-radius: 5px;
+            color: #f55;
+        }
+        h4 {
+            color: #ffa634;
+            font-size: 18px;
+            font-weight: 900;
+        }
+        li a {
+            color: #7173ff;
+            text-decoration: none;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        pre {
+            background: #2728225e;
+            color: #f8f8f2a8;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .service-card {
+            border-left: 3px solid #73ff33;
+            padding-left: 20px;
+            margin: 20px 0;
+            background: #1a1a2e;
+            border-radius: 5px;
+        }
+        .architecture-diagram {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 3px solid #7173ff;
+        }
+        .architecture-diagram pre {
+            background: transparent;
+            color: #f8f8f2;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .feature-item {
+            background: #1a1a2e;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid #ffa634;
+            color: #aaaaaa;
+        }
+        .url-list {
+            list-style: none;
+            padding: 0;
+        }
+        .url-list li {
+            background: #1a1a2e;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            border-left: 3px solid #7173ff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Ticketing System - Microservices Architecture</h1>
+        
+        <p>A scalable event ticketing system built with Laravel microservices architecture, designed to handle both small-scale events and large international concerts.</p>
+
+        <h2>Architecture Overview</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <h3>API Gateway (Port 8000)</h3>
+                <ul>
+                    <li>Entry point for all client requests</li>
+                    <li>Handles request routing and load balancing</li>
+                    <li>Manages service discovery</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Auth Service (Port 8001)</h3>
+                <ul>
+                    <li>Handles authentication and authorization</li>
+                    <li>JWT token management</li>
+                    <li>User roles: Admin, EventCreator, Operator, User</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>User Service (Port 8002)</h3>
+                <ul>
+                    <li>User profile management</li>
+                    <li>User purchase history</li>
+                    <li>Account settings</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Event Service (Port 8003)</h3>
+                <ul>
+                    <li>Event CRUD operations</li>
+                    <li>Event capacity management</li>
+                    <li>Event details and scheduling</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Ticket Service (Port 8004)</h3>
+                <ul>
+                    <li>Ticket purchasing and management</li>
+                    <li>Payment processing</li>
+                    <li>Ticket validation and verification</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Notification Service (Port 8005)</h3>
+                <ul>
+                    <li>Handles email notifications</li>
+                    <li>Purchase confirmations</li>
+                    <li>Event updates</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>System Architecture Diagram</h2>
+        <div class="architecture-diagram">
+            <style>
+                .architecture-box {
+                    display: inline-block;
+                    padding: 8px 16px;
+                    margin: 4px;
+                    border: 2px solid #7173ff;
+                    border-radius: 8px;
+                    background: #1a1a2e;
+                    color: #f8f8f2;
+                    font-family: 'IBM Plex Mono', monospace;
+                    text-align: center;
+                }
+                .architecture-container {
+                    padding: 20px;
+                    text-align: center;
+                }
+                .architecture-line {
+                    color: #7173ff;
+                }
+                .load-balancer {
+                    border-color: #73ff33;
+                    background: #1a2f1a;
+                }
+                .api-gateway {
+                    border-color: #ffa634;
+                    background: #2f1a1a;
+                }
+                .service {
+                    border-color: #7173ff;
+                    background: #1a1a2f;
+                }
+                .database {
+                    border-color: #ff3366;
+                    background: #2f1a2a;
+                }
+            </style>
+            <div class="architecture-container">
+                <div class="architecture-box load-balancer">Load Balancer (Nginx)</div>
+                <div class="architecture-line">↓</div>
+                <div class="architecture-box api-gateway">API Gateway</div>
+                <div class="architecture-line">↓</div>
+                <div style="display: flex; justify-content: space-between; margin: 20px 0;">
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">Auth Service</div>
+                        <div class="architecture-line">↓</div>
+                        <div class="architecture-box database">Auth DB</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">User Service</div>
+                        <div class="architecture-line">↓</div>
+                        <div class="architecture-box database">User DB</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">Event Service</div>
+                        <div class="architecture-line">↓</div>
+                        <div class="architecture-box database">Event DB</div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 20px 0;">
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">Ticket Service</div>
+                        <div class="architecture-line">↓</div>
+                        <div class="architecture-box database">Ticket DB</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">Notification Service</div>
+                        <div class="architecture-line">↓</div>
+                        <div class="architecture-box database">Notification DB</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="architecture-box service">Frontend (React)</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; border-top: 1px solid #7173ff; padding-top: 20px;">
+                <h4 style="color: #73ff33;">Color Legend:</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><span style="color: #73ff33;">■</span> Load Balancer</li>
+                    <li><span style="color: #ffa634;">■</span> API Gateway</li>
+                    <li><span style="color: #7173ff;">■</span> Microservices</li>
+                    <li><span style="color: #ff3366;">■</span> Databases</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Features</h2>
+        <div class="feature-list">
+            <div class="feature-item">User authentication and authorization</div>
+            <div class="feature-item">Event creation and management</div>
+            <div class="feature-item">Secure ticket purchasing</div>
+            <div class="feature-item">Automated email notifications after each purchase or cancel</div>
+            <div class="feature-item">Payment processing</div>
+            <div class="feature-item">Ticket validation</div>
+            <div class="feature-item">User purchase history</div>
+            <div class="feature-item">Admin dashboard</div>
+        </div>
+
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>Docker</li>
+            <li>Docker Compose</li>
+            <li>Git</li>
+        </ul>
+
+        <h2>Installation</h2>
+        <ol>
+            <li>
+                <p>Clone the repository:</p>
+                <pre><code>git clone https://github.com/chabbasaad/Events_Microservices</code></pre>
+            </li>
+            <li>
+                <p>Enter to the repository</p>
+                <pre><code>cd laravel_Microservices</code></pre>
+            </li>
+            <li>
+                <p>Build and start the containers:</p>
+                <pre><code>docker-compose up -d</code></pre>
+            </li>
+            <li>
+                <p>Run command for Queue work for notification:</p>
+                <pre><code>php artisan queue:work</code></pre>
+            </li>
+        </ol>
+
+        <h2>Service URLs</h2>
+        <ul class="url-list">
+            <li><a href="http://localhost:3000">Frontend: http://localhost:3000</a></li>
+            <li><a href="http://localhost:8000">API Gateway: http://localhost:8000</a></li>
+            <li><a href="http://localhost:8001">Auth Service: http://localhost:8001</a></li>
+            <li><a href="http://localhost:8002">User Service: http://localhost:8002</a></li>
+            <li><a href="http://localhost:8003">Event Service: http://localhost:8003</a></li>
+            <li><a href="http://localhost:8004">Ticket Service: http://localhost:8004</a></li>
+            <li><a href="http://localhost:8005">Notification Service: http://localhost:8005</a></li>
+        </ul>
+
+        <h2>API Documentation</h2>
+        <ul class="url-list">
+            <li><a href="http://localhost:8001/docs/api">Auth Service: http://localhost:8001/docs/api</a></li>
+            <li><a href="http://localhost:8002/docs/api">User Service: http://localhost:8002/docs/api</a></li>
+            <li><a href="http://localhost:8003/docs/api">Event Service: http://localhost:8003/docs/api</a></li>
+            <li><a href="http://localhost:8004/docs/api">Ticket Service: http://localhost:8004/docs/api</a></li>
+        </ul>
+
+        <h2>Security Features</h2>
+        <ul>
+            <li>JWT-based authentication</li>
+            <li>Password encryption</li>
+            <li>Rate limiting</li>
+            <li>CORS protection</li>
+            <li>Database backup scheduling</li>
+            <li>Secure payment processing</li>
+            <li>Ticket-user matching for validation</li>
+        </ul>
+
+        <h2>Error Handling</h2>
+        <ul>
+            <li>Comprehensive error logging in each service</li>
+            <li>Asynchronous notification system for failed operations</li>
+            <li>Transaction rollback for failed purchases</li>
+            <li>Automatic retry mechanism for failed notifications</li>
+        </ul>
+
+        <h2>Logs</h2>
+        <p>Each service maintains its own logs at <code>storage/logs/laravel.log</code></p>
+
+        <h2>Testing</h2>
+        <p>To run tests for all services:</p>
+        <pre><code> comming soon</code></pre>
+    </div>
+</body>
+</html>

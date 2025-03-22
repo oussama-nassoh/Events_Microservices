@@ -37,7 +37,7 @@ The system is composed of the following microservices:
    - Event updates
 
 7. **Frontend** (Port 3000)
-   - React/Vue.js web application
+   - React.js web application
    - User interface for all operations
 
 8. **Load Balancer** (Port 80)
@@ -45,38 +45,38 @@ The system is composed of the following microservices:
    - Request distribution
    - High availability
 
-## System Architecture Diagram
+## System Architecture
 
-```
-                                    ┌─────────────────┐
-                                    │   Load Balancer │
-                                    │     (Nginx)     │
-                                    └────────┬────────┘
-                                             │
-                                    ┌────────┴────────┐
-                                    │   API Gateway   │
-                                    └────────┬────────┘
-                                             │
-                 ┌───────────────────────────┼───────────────────────────┐
-                 │                           │                           │
-        ┌────────┴────────┐        ┌────────┴────────┐         ┌───────┴────────┐
-        │  Auth Service   │        │  User Service   │         │  Event Service  │
-        └────────┬────────┘        └────────┬────────┘         └───────┬────────┘
-                 │                           │                           │
-        ┌────────┴────────┐        ┌────────┴────────┐         ┌───────┴────────┐
-        │    Auth DB      │        │    User DB      │         │    Event DB    │
-        └────────────────┘         └────────────────┘          └───────────────┘
+```mermaid
+graph TD
+    LB[Load Balancer<br/>Nginx] --> AG[API Gateway]
+    
+    subgraph Services
+        AG --> AS[Auth Service]
+        AG --> US[User Service]
+        AG --> ES[Event Service]
+        AG --> TS[Ticket Service]
+        AG --> NS[Notification Service]
+        AG --> FE[Frontend<br/>React.js]
+    end
+    
+    subgraph Databases
+        AS --> ADB[(Auth DB)]
+        US --> UDB[(User DB)]
+        ES --> EDB[(Event DB)]
+        TS --> TDB[(Ticket DB)]
+        NS --> NDB[(Notification DB)]
+    end
 
-                 ┌───────────────────────────┼───────────────────────────┐
-                 │                           │                           │
-        ┌────────┴────────┐        ┌────────┴────────┐         ┌───────┴────────┐
-        │ Ticket Service  │        │  Notification   │         │    Frontend     │
-        └────────┬────────┘        │    Service      │         │     (Web)      │
-                 │                 └────────┬────────┘          └───────────────┘
-        ┌────────┴────────┐               │
-        │   Ticket DB     │      ┌────────┴────────┐
-        └────────────────┘       │ Notification DB │
-                                └────────────────┘
+    classDef gateway fill:#f96,stroke:#333,stroke-width:2px
+    classDef service fill:#58a,stroke:#333,stroke-width:2px
+    classDef database fill:#eb4,stroke:#333,stroke-width:2px
+    classDef loadbalancer fill:#7f7,stroke:#333,stroke-width:2px
+    
+    class LB loadbalancer
+    class AG gateway
+    class AS,US,ES,TS,NS,FE service
+    class ADB,UDB,EDB,TDB,NDB database
 ```
 
 ## Features
@@ -153,11 +153,9 @@ API documentation is available at the following URLs:
 
 - Each service maintains its own logs at `storage/logs/laravel.log`
 
-
 ## Testing
 
 To run tests for all services:
 ```bash
 ./run-tests.sh
 ```
-
