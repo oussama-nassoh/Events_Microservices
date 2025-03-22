@@ -11,7 +11,7 @@ if ($?) {
 Start-Sleep -Seconds 2
 
 # Define base directory and services
-$baseDir = "C:\Users\HP\Desktop\c\laravel_Microservices"
+$baseDir = "C:\Users\hamza.belyahiaoui.FRLT284411\Bureau\Events_Microservices"
 $services = @{
     "api-gateway" = 8000  # Default Laravel port
     "auth-service" = 8001
