@@ -29,7 +29,51 @@ return [
         /*
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
-        'description' => '',
+        'description' => '# Event Management Service API
+
+The Event Service is a core component of our ticketing platform, providing comprehensive event management capabilities.
+
+## Core Features
+
+- **Event Management**:
+  - Create and publish events
+  - Update event details
+  - Manage event capacity
+  - Track ticket availability
+  - Handle event scheduling
+
+- **Event Types Support**:
+  - Conferences and Seminars
+  - Workshops and Training
+  - Corporate Events
+  - Tech Meetups
+  - Professional Development Sessions
+
+- **Event Components**:
+  - Detailed event information
+  - Speaker management
+  - Sponsor integration
+  - Location details
+  - Pricing configuration
+  - Image and media handling
+
+## Event Statuses
+
+Events can be in one of the following states:
+- `draft`: Initial creation state
+- `published`: Visible to users
+- `cancelled`: Event cancelled
+- `completed`: Past events
+
+## API Endpoints
+
+The service provides RESTful endpoints for:
+- Event CRUD operations
+- Event status management
+- Capacity and ticket availability
+- Event search and filtering
+- Speaker and sponsor management
+- Event analytics and reporting',
     ],
 
     /*
@@ -37,9 +81,9 @@ return [
      */
     'ui' => [
         /*
-         * Define the title of the documentation's website. App name is used when this config is `null`.
+         * Define the title of the documentation\'s website. App name is used when this config is `null`.
          */
-        'title' => null,
+        'title' => 'Event Management Service API Documentation',
 
         /*
          * Define the theme of the documentation. Available options are `light` and `dark`.

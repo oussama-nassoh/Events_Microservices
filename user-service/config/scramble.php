@@ -29,33 +29,16 @@ return [
         /*
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
-        'description' => '# Authentication Service API
+       'description' => '# User Profile Service API
 
-The Authentication Service is a crucial component of our microservices architecture, providing secure user authentication and authorization functionalities.
+The User Service manages all aspects of user profiles and preferences in our event ticketing platform. This service maintains user information independently from authentication, focusing on user data management and profile customization.
 
 ## Core Features
 
-- **User Authentication**: Secure login and registration endpoints
-- **JWT Management**: Generation and validation of JSON Web Tokens
-- **Role-Based Access Control**: Support for multiple user roles:
-  - Admin: Full system access
-  - Event Creator: Event management privileges
-  - Operator: Operational access
-  - User: Standard access
-- **Security Features**:
-  - Password encryption and validation
-  - Token refresh mechanism
-  - Session management
-  - Password reset functionality
-
-## API Endpoints
-
-The service provides RESTful endpoints for:
-- User registration and login
-- Password management
-- Token refresh and validation
-- Role management
-- User authorization checks',
+- **Profile Management**:
+  - Personal information
+  - Contact details
+  - Language preferences',
     ],
 
     /*
@@ -63,9 +46,9 @@ The service provides RESTful endpoints for:
      */
     'ui' => [
         /*
-         * Define the title of the documentation\'s website. App name is used when this config is `null`.
+         * Define the title of the documentation's website. App name is used when this config is `null`.
          */
-        'title' => 'Authentication Service API Documentation',
+        'title' => 'User Profile Service API Documentation',
 
         /*
          * Define the theme of the documentation. Available options are `light` and `dark`.

@@ -92,22 +92,7 @@ class EventController extends Controller
         }
     }
 
-    public function show(Request $request, $id)
-    {
-        try {
-            $event = Event::findOrFail($id);
-            $user = Auth::user();
-            
-            if (!$event->canBeViewedBy($user)) {
-                return response()->json(['error' => 'Event not found'], 404);
-            }
-            
-            return response()->json($event);
-        } catch (\Exception $e) {
-            Log::error('Failed to fetch event: ' . $e->getMessage());
-            return response()->json(['error' => 'Event not found'], 404);
-        }
-    }
+   
 
     public function update(Request $request, $id)
     {
@@ -400,6 +385,31 @@ class EventController extends Controller
         } catch (\Exception $e) {
             Log::error('Failed to remove sponsor: ' . $e->getMessage());
             return response()->json(['error' => 'Failed to remove sponsor'], 500);
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
+        try {
+            $event = Event::where('id', $id)
+                ->where('status', 'published')
+                ->firstOrFail();
+
+            // Transform the response to include parsed speakers and sponsors
+            $event->speakers = json_decode($event->speakers ?? '[]', true);
+            $event->sponsors = json_decode($event->sponsors ?? '[]', true);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $event,
+                'message' => 'Event retrieved successfully'
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch event: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Event not found'
+            ], 404);
         }
     }
 

@@ -29,7 +29,35 @@ return [
         /*
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
-        'description' => '',
+        'description' => '# Ticket Management & Payment Service API
+
+The Ticket Service handles all aspects of ticket management and payment processing for events.
+
+## Core Features
+
+### Ticket Management
+- **Purchase Operations**:
+  - Single ticket purchase
+  - Bulk ticket purchase
+ 
+  
+
+- **Ticket Features**:
+  - Transfer capability
+  - Refund processing
+  - Ticket validation
+
+### Payment Processing
+- **Payment Methods**:
+  - Credit/Debit cards
+
+- **Payment Features**:
+  - Secure transaction processing
+  - Payment verification
+
+### Security & Validation
+- Real-time ticket validation
+- Transaction encryption',
     ],
 
     /*
@@ -37,32 +65,32 @@ return [
      */
     'ui' => [
         /*
-         * Define the title of the documentation's website. App name is used when this config is `null`.
+         * Define the title of the documentation\'s website.
          */
-        'title' => null,
+        'title' => 'Ticket & Payment Service API Documentation',
 
         /*
-         * Define the theme of the documentation. Available options are `light` and `dark`.
+         * Define the theme of the documentation.
          */
         'theme' => 'light',
 
         /*
-         * Hide the `Try It` feature. Enabled by default.
+         * Hide the `Try It` feature.
          */
         'hide_try_it' => false,
 
         /*
-         * Hide the schemas in the Table of Contents. Enabled by default.
+         * Hide the schemas in the Table of Contents.
          */
         'hide_schemas' => false,
 
         /*
-         * URL to an image that displays as a small square logo next to the title, above the table of contents.
+         * Logo URL
          */
         'logo' => '',
 
         /*
-         * Use to fetch the credential policy for the Try It feature. Options are: omit, include (default), and same-origin
+         * Credentials policy
          */
         'try_it_credentials_policy' => 'include',
     ],
