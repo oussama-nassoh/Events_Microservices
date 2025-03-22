@@ -53,10 +53,18 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 USER laravel
 
-EXPOSE 8000
+EXPOSE 8001
 
 # Run artisan commands
-RUN php artisan key:generate
-RUN php artisan config:cache
+# RUN php artisan key:generate
+# RUN php artisan config:cache
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8001"]
+# CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8001"]
+
+
+# Create a shell script for startup commands
+COPY --chown=laravel:laravel docker-entrypoint.sh /var/www/html/docker-entrypoint.sh
+RUN chmod +x /var/www/html/docker-entrypoint.sh
+
+# Use the shell script as the entry point
+CMD ["/bin/bash", "-c", "/var/www/html/docker-entrypoint.sh"]
