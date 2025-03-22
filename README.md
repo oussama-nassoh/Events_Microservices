@@ -79,6 +79,7 @@ graph TD
     class ADB,UDB,EDB,TDB,NDB database
 ```
 
+
 ## Features
 
 - User authentication and authorization
@@ -113,6 +114,35 @@ docker-compose up -d
 ```bash
 php artisan queue:work
 ```
+
+## Demo User Accounts
+
+The system comes with pre-configured demo accounts for testing purposes:
+
+1. **Admin User**
+   - Email: admin@example.com
+   - Password: password
+   - Role: Admin
+   - Full system access
+
+2. **Event Creator**
+   - Email: eventcreator@example.com
+   - Password: password
+   - Role: Event Creator
+   - Can create and manage events
+
+3. **Operator**
+   - Email: operator@example.com
+   - Password: password
+   - Role: Operator
+   - Can manage tickets and operations
+
+4. **Regular User**
+   - Email: user@example.com
+   - Password: password
+   - Role: User
+   - Standard user privileges
+
 
 ## Service URLs
 
@@ -157,5 +187,5 @@ API documentation is available at the following URLs:
 
 To run tests for all services:
 ```bash
-./run-tests.sh
+comming soon
 ```

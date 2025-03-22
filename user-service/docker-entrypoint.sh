@@ -4,6 +4,8 @@
 echo "Running database migrations..."
 php artisan migrate --force
 
+php artisan db:seed
+
 # Cache configs
 php artisan config:cache
 php artisan route:cache
