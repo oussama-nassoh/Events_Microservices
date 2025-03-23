@@ -192,7 +192,39 @@ comming soon
 
 ## Laodblancer 
 
-To run tests for all services:
+- Cette configuration NGINX fonctionne comme un point d'entrée principal (API Gateway) pour votre architecture microservices. Voici une explication de cette configuration :
+
+Configuration de base du serveur :
+
+Le serveur écoute sur le port 80
+Le nom du serveur est défini comme localhost
+
+
+Frontend :
+
 ```bash
-comming soon
+La route racine / redirige vers le service frontend qui tourne sur le port 80
+Transmet les en-têtes d'origine (Host, Real-IP, etc.)
 ```
+
+
+API Gateway :
+
+```bash
+Toutes les requêtes /api/ sont redirigées vers le service api-gateway sur le port 8000
+Cette route centralise les requêtes API avant leur redirection vers les services spécifiques
+```
+
+
+Accès direct aux services :
+
+Des routes spécifiques pour tester/déboguer chaque service individuellement :
+```bash
+/auth/ → auth-service:8001
+/users/ → user-service:8002
+/events/ → event-service:8003
+/tickets/ → ticket-service:8004
+/notifications/ → notification-service:8005
+```
+
+Cette configuration agit comme un équilibreur de charge (LoadBalancer) en distribuant les requêtes entrantes vers les différents services appropriés selon le chemin URL demandé.

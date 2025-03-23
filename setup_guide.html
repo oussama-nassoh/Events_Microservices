@@ -375,6 +375,69 @@
         <h2>Testing</h2>
         <p>To run tests for all services:</p>
         <pre><code> comming soon</code></pre>
+
+                <h2>Load Balancer Configuration</h2>
+        <p>This NGINX configuration acts as the main entry point (API Gateway) for your microservices architecture. Here's an explanation of the configuration:</p>
+        
+        <h3>Basic Server Setup</h3>
+        <pre><code>server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        proxy_pass http://frontend:80;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /api/ {
+        proxy_pass http://api-gateway:8000;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Access to specific services for testing/debugging
+    location /auth/ {
+        proxy_pass http://auth-service:8001;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /users/ {
+        proxy_pass http://user-service:8002;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /events/ {
+        proxy_pass http://event-service:8003;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /tickets/ {
+        proxy_pass http://ticket-service:8004;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /notifications/ {
+        proxy_pass http://notification-service:8005;
+        proxy_set_header Host $host;
+        proxy_set_header Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}</code></pre>
+
+        <p>This configuration works as a load balancer by distributing incoming requests to the appropriate services based on the requested URL path.</p>
+
+        
     </div>
 </body>
 </html>
