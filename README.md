@@ -169,7 +169,8 @@ API documentation is available at the following URLs:
 - Rate limiting
 - CORS protection
 - Database backup scheduling
-- Secure payment processing
+- Secure payment processing with Firebase backup (https://appfirebase-f3747-default-rtdb.firebaseio.com/)
+- Daily automated payment backups to Firebase Realtime Database
 - Ticket-user matching for validation
 
 ## Error Handling
