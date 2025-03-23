@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 import {toast} from "react-toastify";
-import {EventCreateRequest, FetchEventsResponse} from "../model/event.tsx";
+import {EventCreateRequest} from "../model/event.tsx";
 import {Event} from "../model/event.tsx";
 
 
@@ -12,9 +12,9 @@ const getAuthHeaders = () => ({
 
 
 
-export const fetchEvents = async (): Promise<FetchEventsResponse> => {
+export const fetchEvents = async (): Promise<any> => {
     try {
-        const response = await axios.get<FetchEventsResponse>(`${API_URL}events`, { headers: getAuthHeaders() });
+        const response = await axios.get<any>(`${API_URL}events`, { headers: getAuthHeaders() });
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError && error.response) {
@@ -43,9 +43,9 @@ export const fetchEventsPublic = async (): Promise<any> => {
     }
 };
 
-export const fetchEvent = async (id: number): Promise<Event> => {
+export const fetchEvent = async (id: number): Promise<any> => {
     try {
-        const response = await axios.get<Event>(`${API_URL}events/${id}`);
+        const response = await axios.get<any>(`${API_URL}events/${id}`);
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError && error.response) {

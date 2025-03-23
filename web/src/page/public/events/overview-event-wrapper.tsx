@@ -5,22 +5,11 @@ import OverviewEvent from "./overview-event";
 import Spinner from '../../../components/sniper/sniper';
 
 // Define the structure of the event object with required properties
-interface Event {
-    id: number;
-    title: string;
-    description: string;
-    date: string;
-    location: string;
-    available_tickets: number;
-    speakers: string;
-    sponsors: string;
-    [key: string]: any;  // Allow additional properties if needed
-}
 
 export default function OverviewEventWrapper() {
     const { id } = useParams<{ id: string }>();  // id will be of type string
-    const { events, fetchEvent } = useEventStore();
-    const [event, setEvent] = useState<Event | undefined>(undefined);
+    const { fetchEvent } = useEventStore();
+    const [event, setEvent] = useState<any | undefined>(undefined);
 
     useEffect(() => {
         async function loadEvent() {

@@ -4,22 +4,9 @@ import useTicketStore from "../../../service/store/ticket-store.tsx";
 import { CreateTicketRequest } from "../../../service/model/ticket.tsx";
 import Spinner from "../../../components/sniper/sniper.tsx";
 
-interface Event {
-    id: number;
-    title: string;
-    description: string;
-    date: string;
-    location: string;
-    available_tickets: number;
-    speakers: string | null;
-    sponsors: string | null;
-    price: string;
-    image: string;
-    [key: string]: any; // Allow other properties to be dynamically added if necessary
-}
 
 interface OverviewEventProps {
-    event: Event; // Define the type of the 'event' prop here
+    event: any; // Define the type of the 'event' prop here
 }
 
 export default function OverviewEvent({ event }: OverviewEventProps) {

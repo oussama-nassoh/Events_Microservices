@@ -17,7 +17,7 @@ interface EventState {
     isloadingPublicEvent: boolean;
     isLoading : boolean,
     fetchEvents: () => Promise<void>;
-    fetchEvent: (id : number) => Promise<Event | null>;
+    fetchEvent: (id : number) => Promise<any | null>;
     createEvent: (params : EventCreateRequest) => Promise<Event | null>;
     deleteEvent: (id : number) => Promise<void>;
     updateEvent: (id : number, params : Event) => Promise<void>;
@@ -55,7 +55,7 @@ const useEventStore = create<EventState>((set) => ({
         }
     },
 
-    fetchEvent: async (id): Promise<Event | null> => {
+    fetchEvent: async (id): Promise<any | null> => {
         try {
             const response = await fetchEvent(id);
             const event = response
