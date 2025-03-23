@@ -184,12 +184,7 @@ API documentation is available at the following URLs:
 
 - Each service maintains its own logs at `storage/logs/laravel.log`
 
-## Testing
 
-To run tests for all services:
-```bash
-comming soon
-```
 
 ## Laodblancer 
 
