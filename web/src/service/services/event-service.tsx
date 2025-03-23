@@ -30,7 +30,7 @@ export const fetchEvents = async (): Promise<FetchEventsResponse> => {
 
 export const fetchEventsPublic = async (): Promise<any> => {
     try {
-        const response = await axios.get<any>(`${API_URL}events/public`, { headers: getAuthHeaders() });
+        const response = await axios.get<any>(`${API_URL}events/public`);
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError && error.response) {
@@ -45,7 +45,7 @@ export const fetchEventsPublic = async (): Promise<any> => {
 
 export const fetchEvent = async (id: number): Promise<Event> => {
     try {
-        const response = await axios.get<Event>(`${API_URL}events/${id}`, { headers: getAuthHeaders() });
+        const response = await axios.get<Event>(`${API_URL}events/${id}`);
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError && error.response) {

@@ -11,8 +11,10 @@ interface Event {
     date: string;
     location: string;
     available_tickets: number;
-    speakers: string;
-    sponsors: string;
+    speakers: string | null;
+    sponsors: string | null;
+    price: string;
+    image: string;
     [key: string]: any; // Allow other properties to be dynamically added if necessary
 }
 
@@ -32,7 +34,7 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
     const id = typeof userLocal === "object" && userLocal !== null ? userLocal?.id : undefined;
 
     const handleQuantityChange = (e: any) => {
-        setQuantity(e.target.value);
+        setQuantity(parseInt(e.target.value));
     };
 
     const handlePaymentSubmit = async (e: any) => {
@@ -56,7 +58,6 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
         } finally {
             setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     return (
@@ -67,18 +68,35 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                     <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
                         {event.title}
                     </h1>
+                    
+                    {/* Event image */}
+                    {event.image && (
+                        <div className="mt-6 overflow-hidden rounded-lg">
+                            <img 
+                                src={event.image} 
+                                alt={event.title} 
+                                className="w-full h-auto object-cover"
+                            />
+                        </div>
+                    )}
+                    
                     <p className="mt-6 text-xl text-gray-700">{event.description}</p>
                     <p className="mt-4 text-lg text-gray-600">
                         📅 {new Date(event.date).toLocaleDateString()} - 📍 {event.location}
                     </p>
                     <p className="mt-2 text-lg text-gray-600">🎟 {event.available_tickets} tickets available</p>
+                    <p className="mt-2 text-lg text-gray-600">💰 ${parseFloat(event.price).toFixed(2)} per ticket</p>
                 </div>
 
                 {/* Speakers Section */}
                 <div className="mt-16">
                     <h2 className="text-2xl font-bold text-gray-900">🎤 Speakers</h2>
                     <div className="mt-6 space-y-6">
-                        <p className="text-lg font-semibold text-gray-900">{event.speakers}</p>
+                        {event.speakers ? (
+                            <p className="text-lg font-semibold text-gray-900">{event.speakers}</p>
+                        ) : (
+                            <p className="text-lg text-gray-500">Speakers to be announced</p>
+                        )}
                     </div>
                 </div>
 
@@ -86,7 +104,11 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                 <div className="mt-16">
                     <h2 className="text-2xl font-bold text-gray-900">🤝 Sponsors</h2>
                     <div className="mt-6 flex flex-wrap gap-6">
-                        <p className="mt-2 text-lg font-semibold text-gray-900">{event.sponsors}</p>
+                        {event.sponsors ? (
+                            <p className="mt-2 text-lg font-semibold text-gray-900">{event.sponsors}</p>
+                        ) : (
+                            <p className="mt-2 text-lg text-gray-500">Sponsors to be announced</p>
+                        )}
                     </div>
                 </div>
 
@@ -111,12 +133,13 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
 
                 {/* Payment Section */}
                 <div className="mt-16">
-                    <h2 className="flex item-center text-2xl font-bold tracking-tight text-gray-900 w-500">🎟 Purchase Tickets</h2>
-                    <form onSubmit={handlePaymentSubmit} className="mt-6 space-y-6 w-150">
-                        <div className="flex gap-4">
-                            <div className="">
-                                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Ticket
-                                    Quantity</label>
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900">🎟 Purchase Tickets</h2>
+                    <div className="mt-4 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <form onSubmit={handlePaymentSubmit} className="space-y-6">
+                            <div>
+                                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+                                    Ticket Quantity
+                                </label>
                                 <input
                                     type="number"
                                     id="quantity"
@@ -124,66 +147,75 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                                     onChange={handleQuantityChange}
                                     min="1"
                                     max={event.available_tickets}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                    className="mt-1 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
+                                <p className="mt-1 text-sm text-gray-500">
+                                    Total: ${(parseFloat(event.price) * quantity).toFixed(2)}
+                                </p>
                             </div>
-                        </div>
 
-                        <div>
-                            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">Card
-                                Number</label>
-                            <input
-                                type="text"
-                                id="cardNumber"
-                                value={cardNumber}
-                                onChange={(e) => setCardNumber(e.target.value)}
-                                required
-                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
-                        </div>
-
-                        <div className="flex gap-4">
-                            <div className="w-1/2">
-                                <label htmlFor="expiry" className="block text-sm font-medium text-gray-700">Expiry
-                                    Date</label>
+                            <div>
+                                <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">
+                                    Card Number
+                                </label>
                                 <input
                                     type="text"
-                                    id="expiry"
-                                    value={expiry}
-                                    onChange={(e) => setExpiry(e.target.value)}
+                                    id="cardNumber"
+                                    value={cardNumber}
+                                    onChange={(e) => setCardNumber(e.target.value)}
                                     required
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                    placeholder="MM/YY"
+                                    placeholder="1234 5678 9012 3456"
+                                    className="mt-1 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
                             </div>
-                            <div className="w-1/2">
-                                <label htmlFor="cvv" className="block text-sm font-medium text-gray-700">CVV</label>
-                                <input
-                                    type="text"
-                                    id="cvv"
-                                    value={cvv}
-                                    onChange={(e) => setCvv(e.target.value)}
-                                    required
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                    placeholder="CVV"
-                                />
-                            </div>
-                        </div>
 
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full mt-4 flex items-center justify-center bg-gray-950 text-white py-2 px-4 rounded-md hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                            {isSubmitting ? (
-                                <>
-                                 <Spinner/>
-                                </>
-                            ) : (
-                                "Purchase Tickets"
-                            )}
-                        </button>
-                    </form>
+                            <div className="flex gap-4">
+                                <div className="w-1/2">
+                                    <label htmlFor="expiry" className="block text-sm font-medium text-gray-700">
+                                        Expiry Date
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="expiry"
+                                        value={expiry}
+                                        onChange={(e) => setExpiry(e.target.value)}
+                                        required
+                                        placeholder="MM/YY"
+                                        className="mt-1 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                </div>
+                                <div className="w-1/2">
+                                    <label htmlFor="cvv" className="block text-sm font-medium text-gray-700">
+                                        CVV
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="cvv"
+                                        value={cvv}
+                                        onChange={(e) => setCvv(e.target.value)}
+                                        required
+                                        placeholder="123"
+                                        className="mt-1 block w-full rounded-md bg-white px-3 py-2 text-gray-900 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full mt-6 flex items-center justify-center bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner />
+                                        <span className="ml-2">Processing...</span>
+                                    </>
+                                ) : (
+                                    "Purchase Tickets"
+                                )}
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
