@@ -28,6 +28,22 @@ export const fetchTickets = async (id : number): Promise<TicketResponse[]> => {
     }
 };
 
+export const fetchTicketsAll = async (): Promise<any> => {
+    try {
+        const response = await axios.get<any>(`${API_URL}tickets`, { headers: getAuthHeaders() });
+        return response.data;
+    } catch (error) {
+        if (error instanceof AxiosError && error.response) {
+            const errorMessage = error.response.data?.message || "Une erreur est survenue";
+            console.log(errorMessage)
+        } else {
+            toast.error("Erreur inconnue");
+        }
+        throw error;
+    }
+};
+
+
 
 export const createTicket = async (params: CreateTicketRequest): Promise<CreateTicketResponse> => {
     try {

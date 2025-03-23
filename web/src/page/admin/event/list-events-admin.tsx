@@ -66,13 +66,13 @@ export default function ListEventsAdmin() {
                                     {t("name")}
                                 </th>
                                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    {t("title")}
+                                    {t("event")}
                                 </th>
                                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    {t("email")}
+                                    {t("date")}
                                 </th>
                                 <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    {t("role")}
+                                    {t("status")}
                                 </th>
                                 <th scope="col" className="relative py-3.5 pr-4 pl-3 sm:pr-3">
                                     <span className="sr-only">{t("edit")}</span>

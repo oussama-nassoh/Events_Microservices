@@ -7,7 +7,7 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
     const [eventData, setEventData] = useState<any>({
         title: "",
         description: "",
-        status: "",
+        status: "draft",
         date: "2025-06-15",
         location: "Convention Center",
         max_tickets: 500,
@@ -17,7 +17,7 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
         image: "test"
     });
 
-    const [isLoading, setIsLoading] = useState(false); // État pour le chargement
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const selectedEvent = events.find(event => event.id === id);
@@ -26,7 +26,7 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
                 title: selectedEvent.title || "",
                 description: selectedEvent.description || "",
                 date: selectedEvent.date ? new Date(selectedEvent.date).toISOString().split("T")[0] : "",
-                status: selectedEvent.status || "",
+                status: selectedEvent.status || "draft",
                 location: selectedEvent.location || "",
                 max_tickets: selectedEvent.max_tickets || 500,
                 price: selectedEvent.price || 99.99,
@@ -44,16 +44,23 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
         });
     };
 
+    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEventData({
+            ...eventData,
+            status: e.target.checked ? "published" : "draft",
+        });
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoading(true); // Activer le chargement
+        setIsLoading(true);
         try {
-            await updateEvent(id, eventData); // Mettre à jour l'événement
-            setIsOpenUpdate(false); // Fermer le modal après succès
+            await updateEvent(id, eventData);
+            setIsOpenUpdate(false);
         } catch (error) {
             console.error("Erreur lors de la mise à jour :", error);
         } finally {
-            setIsLoading(false); // Désactiver le chargement
+            setIsLoading(false);
         }
     };
 
@@ -100,16 +107,16 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-gray-700 font-medium">Statut</label>
+                    {/* Checkbox pour le statut */}
+                    <div className="col-span-2 flex items-center space-x-2">
                         <input
-                            type="text"
-                            name="status"
-                            value={eventData.status}
-                            onChange={handleChange}
-                            required
-                            className="m-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-gray-300 focus:outline-indigo-600"
+                            type="checkbox"
+                            id="status"
+                            checked={eventData.status === "published"}
+                            onChange={handleCheckboxChange}
+                            className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
+                        <label htmlFor="status" className="text-gray-700 font-medium">Publié</label>
                     </div>
 
                     <div>
@@ -189,9 +196,7 @@ export default function UpdateEventAdmin({ id, setIsOpenUpdate }: { id: number, 
                     type="submit"
                     disabled={isLoading}
                     className={`w-full py-2 rounded-lg font-semibold transition duration-200 ${
-                        isLoading
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-gray-950 text-white hover:bg-gray-800"
+                        isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-gray-950 text-white hover:bg-gray-800"
                     }`}
                 >
                     {isLoading ? <Spinner /> : "Mettre à jour l'événement"}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid';
 import useTicketStore from "../../../service/store/ticket-store.tsx";
 import { CreateTicketRequest } from "../../../service/model/ticket.tsx";
+import Spinner from "../../../components/sniper/sniper.tsx";
 
 interface Event {
     id: number;
@@ -48,7 +49,13 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
             },
         };
 
-        createTicket(id, paymentData);
+        try {
+            await createTicket(id, paymentData);
+        } catch (error) {
+            console.error("Payment failed:", error);
+        } finally {
+            setIsSubmitting(false);
+        }
         setIsSubmitting(false);
     };
 
@@ -108,7 +115,8 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                     <form onSubmit={handlePaymentSubmit} className="mt-6 space-y-6 w-150">
                         <div className="flex gap-4">
                             <div className="">
-                                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Ticket Quantity</label>
+                                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Ticket
+                                    Quantity</label>
                                 <input
                                     type="number"
                                     id="quantity"
@@ -122,7 +130,8 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                         </div>
 
                         <div>
-                            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">Card Number</label>
+                            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">Card
+                                Number</label>
                             <input
                                 type="text"
                                 id="cardNumber"
@@ -135,7 +144,8 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
 
                         <div className="flex gap-4">
                             <div className="w-1/2">
-                                <label htmlFor="expiry" className="block text-sm font-medium text-gray-700">Expiry Date</label>
+                                <label htmlFor="expiry" className="block text-sm font-medium text-gray-700">Expiry
+                                    Date</label>
                                 <input
                                     type="text"
                                     id="expiry"
@@ -163,9 +173,15 @@ export default function OverviewEvent({ event }: OverviewEventProps) {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full mt-4 bg-gray-950 text-white py-2 px-4 rounded-md hover:bg-gray-800 disabled:bg-indigo-300"
+                            className="w-full mt-4 flex items-center justify-center bg-gray-950 text-white py-2 px-4 rounded-md hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed"
                         >
-                            {isSubmitting ? 'Processing...' : 'Purchase Tickets'}
+                            {isSubmitting ? (
+                                <>
+                                 <Spinner/>
+                                </>
+                            ) : (
+                                "Purchase Tickets"
+                            )}
                         </button>
                     </form>
                 </div>

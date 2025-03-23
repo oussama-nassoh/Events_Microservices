@@ -7,7 +7,7 @@ import Spinner from "../../../components/sniper/sniper.tsx";
 
 export default function ListTicketsAdmin() {
     const { t } = useTranslation();
-    const { tickets, fetchTickets, deleteTicket, validateTicket, isLoading } = useTicketStore();
+    const { tickets,fetchTicketsAll,deleteTicket, validateTicket, isLoading } = useTicketStore();
     const [isOpenCreate, setIsOpenCreate] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [processingTicketId, setProcessingTicketId] = useState<number | null>(null);
@@ -19,7 +19,7 @@ export default function ListTicketsAdmin() {
     useEffect(() => {
         const loadTickets = async () => {
             try {
-                await fetchTickets(id);
+                await fetchTicketsAll();
             } catch (error) {
                 console.error("Erreur lors de la récupération des tickets", error);
             }
@@ -30,6 +30,7 @@ export default function ListTicketsAdmin() {
         }
     }, [id]);
 
+    console.log(tickets)
     const handleDeleteTicket = async (ticketId: number, eventId: number, quantity: number) => {
         if (!window.confirm(t("confirm_delete"))) return;
 

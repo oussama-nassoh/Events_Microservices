@@ -8,7 +8,6 @@ export default function ListEvents() {
     const { t } = useTranslation();
     const { eventPublic, isloadingPublicEvent,fetchEventsPublic } = useEventStore();
     const navigate = useNavigate();
-    const userData = localStorage.getItem("user_data");
 
     useEffect(() => {
         fetchEventsPublic();
@@ -23,12 +22,7 @@ export default function ListEvents() {
                     </h2>
                     <p className="mt-2 text-lg text-gray-600">{t("event-title")}</p>
                 </div>
-                {!userData ? (
-                        <p className="text-center text-red-800 mt-10 text-lg text-gray-500">
-                            {t("please_log_in_to_view")}
-                        </p>
-                    ) :
-                    isloadingPublicEvent ? (
+                {isloadingPublicEvent ? (
                     <div className="flex justify-center mt-10">
                         <Spinner />
                     </div>
