@@ -1,4 +1,11 @@
 #!/bin/bash
+set -e  # Exit immediately if a command exits with a non-zero status
+
+echo "Installing Composer dependencies..."
+composer install --no-interaction
+
+# Generate application key if not already set
+php artisan key:generate --no-interaction --force
 
 # Run migrations
 echo "Running database migrations..."
