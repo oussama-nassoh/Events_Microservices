@@ -52,22 +52,22 @@ The system is composed of the following microservices:
 1. **React**
 We chose React.js for the frontend to ensure a smooth, high-performance, and scalable application.
 
-✅ Performance: Virtual DOM enables fast updates.
-✅ Modularity: Reusable components for efficient development.
-✅ User Experience: Interactive and dynamic interface.
-✅ Rich Ecosystem: Easy integration with Redux, React Router, and APIs.
-✅ Scalability: Easy to maintain and expand.
+- Performance: Virtual DOM enables fast updates.
+- Modularity: Reusable components for efficient development.
+- User Experience: Interactive and dynamic interface.
+- Rich Ecosystem: Easy integration with Redux, React Router, and APIs.
+- Scalability: Easy to maintain and expand.
 
 React.js allows us to deliver a modern, fast, and intuitive platform for event management. 
 
 1. **Laravel**
 We chose Laravel for the backend to ensure a robust, secure, and scalable application.
 
-✅ Performance: Optimized framework with caching and Eloquent ORM.
-✅ Security: Built-in protection against SQL injection, CSRF, and authentication.
-✅ Modularity: MVC architecture for easy maintenance and scalability.
-✅ API Ready: Seamless creation of RESTful APIs to communicate with the React.js frontend.
-✅ Rich Ecosystem: Native integration with Laravel Passport, Sanctum, and queues for background tasks.
+- Performance: Optimized framework with caching and Eloquent ORM.
+- Security: Built-in protection against SQL injection, CSRF, and authentication.
+- Modularity: MVC architecture for easy maintenance and scalability.
+- API Ready: Seamless creation of RESTful APIs to communicate with the React.js frontend.
+- Rich Ecosystem: Native integration with Laravel Passport, Sanctum, and queues for background tasks.
 
 Laravel enables us to build a reliable, high-performance, and scalable event management solution. 🚀
 
@@ -217,39 +217,37 @@ API documentation is available at the following URLs:
 
 ## Laodblancer 
 
-- Cette configuration NGINX fonctionne comme un point d'entrée principal (API Gateway) pour votre architecture microservices. Voici une explication de cette configuration :
+We have set up this NGINX configuration to act as the main entry point (API Gateway) in our microservices architecture. Here’s how it works:
 
-Configuration de base du serveur :
+Basic Server Configuration:
+Our server listens on port 80.
 
-Le serveur écoute sur le port 80
-Le nom du serveur est défini comme localhost
+We have set the server name to localhost.
 
+Frontend Handling:
+The root route / redirects directly to our frontend service, which runs on port 80.
 
-Frontend :
+We have also configured it to forward origin headers (Host, Real-IP, etc.) for better request handling.
 
-```bash
-La route racine / redirige vers le service frontend qui tourne sur le port 80
-Transmet les en-têtes d'origine (Host, Real-IP, etc.)
-```
+API Gateway Setup:
+All requests sent to /api/ are redirected to our API Gateway service, which runs on port 8000.
 
+This central point allows us to manage and dispatch requests to the appropriate services without exposing direct access.
 
-API Gateway :
+Direct Access to Services (For Testing & Debugging):
+To facilitate monitoring and testing, we have set up specific routes for direct service access:
 
-```bash
-Toutes les requêtes /api/ sont redirigées vers le service api-gateway sur le port 8000
-Cette route centralise les requêtes API avant leur redirection vers les services spécifiques
-```
+/auth/ → auth-service (port 8001)
 
+/users/ → user-service (port 8002)
 
-Accès direct aux services :
+/events/ → event-service (port 8003)
 
-Des routes spécifiques pour tester/déboguer chaque service individuellement :
-```bash
-/auth/ → auth-service:8001
-/users/ → user-service:8002
-/events/ → event-service:8003
-/tickets/ → ticket-service:8004
-/notifications/ → notification-service:8005
-```
+/tickets/ → ticket-service (port 8004)
 
-Cette configuration agit comme un équilibreur de charge (LoadBalancer) en distribuant les requêtes entrantes vers les différents services appropriés selon le chemin URL demandé.
+/notifications/ → notification-service (port 8005)
+
+Load Balancing Mechanism
+Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
+
+With this setup, we have a structured, high-performance, and easily extensible architecture for our project.
