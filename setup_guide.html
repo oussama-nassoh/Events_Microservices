@@ -391,7 +391,7 @@
                 <h2>Load Balancer Configuration</h2>
     <p>We have set up this NGINX configuration to act as the main entry point (API Gateway) in our microservices architecture. Here’s how it works:</p>
  <pre><code>
-Basic Server Configuration: Our server listens on port 80.
+<p>Basic Server Configuration: Our server listens on port 80.
 
 We have set the server name to localhost.
 
@@ -401,9 +401,9 @@ We have also configured it to forward origin headers (Host, Real-IP, etc.) for b
 
 API Gateway Setup: All requests sent to /api/ are redirected to our API Gateway service, which runs on port 8000.
 
-This central point allows us to manage and dispatch requests to the appropriate services without exposing direct access.
+This central point allows us to manage and dispatch requests to the appropriate services without exposing direct access.</p>
 
-Direct Access to Services (For Testing & Debugging): To facilitate monitoring and testing, we have set up specific routes for direct service access:
+<p>Direct Access to Services (For Testing & Debugging): To facilitate monitoring and testing, we have set up specific routes for direct service access:</p>
   <ul>
             <li/auth/ → auth-service (port 8001)</li>
             <li>/users/ → user-service (port 8002)</li>
@@ -413,10 +413,10 @@ Direct Access to Services (For Testing & Debugging): To facilitate monitoring an
         </ul>
 
 
-Load Balancing Mechanism Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
+<p>Load Balancing Mechanism Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
 
-With this setup, we have a structured, high-performance, and easily extensible architecture for our project.
-}</code></pre>
+With this setup, we have a structured, high-performance, and easily extensible architecture for our project.</p>
+</code></pre>
 
         <p>This configuration works as a load balancer by distributing incoming requests to the appropriate services based on the requested URL path.</p>
 
