@@ -236,7 +236,7 @@ This central point allows us to manage and dispatch requests to the appropriate 
 
 Direct Access to Services (For Testing & Debugging):
 To facilitate monitoring and testing, we have set up specific routes for direct service access:
-
+```bash
 /auth/ → auth-service (port 8001)
 
 /users/ → user-service (port 8002)
@@ -246,7 +246,7 @@ To facilitate monitoring and testing, we have set up specific routes for direct 
 /tickets/ → ticket-service (port 8004)
 
 /notifications/ → notification-service (port 8005)
-
+```
 Load Balancing Mechanism
 Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
 
