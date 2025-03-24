@@ -45,6 +45,35 @@ The system is composed of the following microservices:
    - Request distribution
    - High availability
 
+## Architecture Overview
+
+The system is composed of the following microservices:
+
+1. **React**
+We chose React.js for the frontend to ensure a smooth, high-performance, and scalable application.
+
+✅ Performance: Virtual DOM enables fast updates.
+✅ Modularity: Reusable components for efficient development.
+✅ User Experience: Interactive and dynamic interface.
+✅ Rich Ecosystem: Easy integration with Redux, React Router, and APIs.
+✅ Scalability: Easy to maintain and expand.
+
+React.js allows us to deliver a modern, fast, and intuitive platform for event management. 
+
+1. **Laravel**
+We chose Laravel for the backend to ensure a robust, secure, and scalable application.
+
+✅ Performance: Optimized framework with caching and Eloquent ORM.
+✅ Security: Built-in protection against SQL injection, CSRF, and authentication.
+✅ Modularity: MVC architecture for easy maintenance and scalability.
+✅ API Ready: Seamless creation of RESTful APIs to communicate with the React.js frontend.
+✅ Rich Ecosystem: Native integration with Laravel Passport, Sanctum, and queues for background tasks.
+
+Laravel enables us to build a reliable, high-performance, and scalable event management solution. 🚀
+
+
+
+
 ## System Architecture
 
 ```mermaid
