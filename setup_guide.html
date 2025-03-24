@@ -393,62 +393,34 @@
         <pre><code> comming soon</code></pre>
 
                 <h2>Load Balancer Configuration</h2>
-        <p>This NGINX configuration acts as the main entry point (API Gateway) for your microservices architecture. Here's an explanation of the configuration:</p>
-        
-        <h3>Basic Server Setup</h3>
-        <pre><code>server {
-    listen 80;
-    server_name localhost;
+    <p>We have set up this NGINX configuration to act as the main entry point (API Gateway) in our microservices architecture. Here’s how it works:</p>
 
-    location / {
-        proxy_pass http://frontend:80;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+Basic Server Configuration: Our server listens on port 80.
 
-    location /api/ {
-        proxy_pass http://api-gateway:8000;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+We have set the server name to localhost.
 
-    # Access to specific services for testing/debugging
-    location /auth/ {
-        proxy_pass http://auth-service:8001;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+Frontend Handling: The root route / redirects directly to our frontend service, which runs on port 80.
 
-    location /users/ {
-        proxy_pass http://user-service:8002;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+We have also configured it to forward origin headers (Host, Real-IP, etc.) for better request handling.
 
-    location /events/ {
-        proxy_pass http://event-service:8003;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+API Gateway Setup: All requests sent to /api/ are redirected to our API Gateway service, which runs on port 8000.
 
-    location /tickets/ {
-        proxy_pass http://ticket-service:8004;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+This central point allows us to manage and dispatch requests to the appropriate services without exposing direct access.
 
-    location /notifications/ {
-        proxy_pass http://notification-service:8005;
-        proxy_set_header Host $host;
-        proxy_set_header Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+Direct Access to Services (For Testing & Debugging): To facilitate monitoring and testing, we have set up specific routes for direct service access:
+
+/auth/ → auth-service (port 8001)
+
+/users/ → user-service (port 8002)
+
+/events/ → event-service (port 8003)
+
+/tickets/ → ticket-service (port 8004)
+
+/notifications/ → notification-service (port 8005)
+Load Balancing Mechanism Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
+
+With this setup, we have a structured, high-performance, and easily extensible architecture for our project.
 }</code></pre>
 
         <p>This configuration works as a load balancer by distributing incoming requests to the appropriate services based on the requested URL path.</p>
