@@ -1,5 +1,10 @@
 # Event Ticketing System - Microservices Architecture
 
+Project Team 4WEBD
+Saad Chabba
+
+Hamza Belyahiaoui
+
 A scalable event ticketing system built with Laravel microservices architecture, designed to handle both small-scale events and large international concerts.
 
 ## Architecture Overview
