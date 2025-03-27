@@ -18,7 +18,7 @@ class ApiGatewayServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Register the middleware
+        
         Route::middleware('api')
             ->prefix('api/v1')
             ->group(function () {

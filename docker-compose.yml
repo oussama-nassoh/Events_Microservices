@@ -1,18 +1,5 @@
 services:
-  # Add your frontend service
-  frontend:
-    build:
-      context: ./web  # Path to your frontend project
-      dockerfile: Dockerfile
-    container_name: web
-    restart: unless-stopped
-    ports:
-      - "3000:80"  # Map port 3000 on host to 80 in container
-    networks:
-      - microservices-network
-    depends_on:
-      - api-gateway
-  # Load Balancer for Local Development
+
   loadbalancer:
     image: nginx:alpine
     container_name: loadbalancer
