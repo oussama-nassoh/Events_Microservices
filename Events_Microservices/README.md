@@ -1,92 +1,99 @@
-# Event Ticketing System - Microservices Architecture
+Système de Billetterie Événementielle - Architecture Microservices
 
+Un système évolutif de billetterie événementielle construit avec une architecture microservices Laravel, conçu pour gérer des événements de petite et grande envergure, comme des concerts internationaux.
 
-**Project Team 4WEBD**
+Aperçu de l'Architecture
+Le système se compose des microservices suivants :
 
-   - Saad Chabba
-   - Hamza Belyahiaoui
+API Gateway (Port 8000)
 
+Point d'entrée pour les requêtes des clients
 
-A scalable event ticketing system built with Laravel microservices architecture, designed to handle both small-scale events and large international concerts.
+Gestion du routage et de l'équilibrage de charge
 
-## Architecture Overview
+Découverte des services
 
-The system is composed of the following microservices:
+Service Auth (Port 8001)
 
-1. **API Gateway** (Port 8000)
-   - Entry point for all client requests
-   - Handles request routing and load balancing
-   - Manages service discovery
+Authentification et autorisation
 
-2. **Auth Service** (Port 8001)
-   - Handles authentication and authorization
-   - JWT token management
-   - User roles: Admin, EventCreator, Operator, User
+Gestion des tokens JWT
 
-3. **User Service** (Port 8002)
-   - User profile management
-   - User purchase history
-   - Account settings
+Rôles utilisateur : Admin, Créateur d'événements, Opérateur, Utilisateur
 
-4. **Event Service** (Port 8003)
-   - Event CRUD operations
-   - Event capacity management
-   - Event details and scheduling
+Service Utilisateur (Port 8002)
 
-5. **Ticket Service** (Port 8004)
-   - Ticket purchasing and management
-   - Payment processing
-   - Ticket validation and verification
+Gestion des profils utilisateurs
 
-6. **Notification Service** (Port 8005)
-   - Handles email/SMS notifications
-   - Purchase confirmations
-   - Event updates
+Historique des achats
 
-7. **Frontend** (Port 3000)
-   - React.js web application
-   - User interface for all operations
+Paramètres du compte
 
-8. **Load Balancer** (Port 80)
-   - Nginx load balancer
-   - Request distribution
-   - High availability
+Service Événement (Port 8003)
 
-## Architecture Overview
+Création, modification et suppression d'événements
 
-The system is composed of the following microservices:
+Gestion de la capacité des événements
 
-1. **React**
-We chose React.js for the frontend to ensure a smooth, high-performance, and scalable application.
+Détails et planification des événements
 
-- Performance: Virtual DOM enables fast updates.
-- Modularity: Reusable components for efficient development.
-- User Experience: Interactive and dynamic interface.
-- Rich Ecosystem: Easy integration with Redux, React Router, and APIs.
-- Scalability: Easy to maintain and expand.
+Service Billet (Port 8004)
 
-React.js allows us to deliver a modern, fast, and intuitive platform for event management. 
+Achat et gestion des billets
 
-1. **Laravel**
-We chose Laravel for the backend to ensure a robust, secure, and scalable application.
+Traitement des paiements
 
-- Performance: Optimized framework with caching and Eloquent ORM.
-- Security: Built-in protection against SQL injection, CSRF, and authentication.
-- Modularity: MVC architecture for easy maintenance and scalability.
-- API Ready: Seamless creation of RESTful APIs to communicate with the React.js frontend.
-- Rich Ecosystem: Native integration with Laravel Passport, Sanctum, and queues for background tasks.
+Validation des billets
 
-Laravel enables us to build a reliable, high-performance, and scalable event management solution. 🚀
+Service Notification (Port 8005)
 
+Notifications par email/SMS
 
+Confirmation d'achat
 
+Mises à jour d'événements
 
-## System Architecture
+Frontend (Port 3000)
 
-```mermaid
+Application web React.js
+
+Interface utilisateur pour toutes les opérations
+
+Load Balancer (Port 80)
+
+Équilibrage de charge Nginx
+
+Distribution des requêtes
+
+Haute disponibilité
+
+Choix des Technologies
+React.js (Frontend)
+
+Performant grâce au DOM virtuel
+
+Modulaire avec des composants réutilisables
+
+Interface dynamique et interactive
+
+Écosystème riche (Redux, React Router)
+
+Laravel (Backend)
+
+Optimisation des performances avec ORM Eloquent
+
+Sécurisé contre les injections SQL et CSRF
+
+Architecture MVC pour une maintenance aisée
+
+API prête pour intégrer le frontend React.js
+
+Diagramme d'Architecture
+mermaid
+Copier
+Modifier
 graph TD
     LB[Load Balancer<br/>Nginx] --> AG[API Gateway]
-    
     subgraph Services
         AG --> AS[Auth Service]
         AG --> US[User Service]
@@ -95,7 +102,6 @@ graph TD
         AG --> NS[Notification Service]
         AG --> FE[Frontend<br/>React.js]
     end
-    
     subgraph Databases
         AS --> ADB[(Auth DB)]
         US --> UDB[(User DB)]
@@ -103,158 +109,141 @@ graph TD
         TS --> TDB[(Ticket DB)]
         NS --> NDB[(Notification DB)]
     end
-
     classDef gateway fill:#f96,stroke:#333,stroke-width:2px
     classDef service fill:#58a,stroke:#333,stroke-width:2px
     classDef database fill:#eb4,stroke:#333,stroke-width:2px
     classDef loadbalancer fill:#7f7,stroke:#333,stroke-width:2px
-    
     class LB loadbalancer
     class AG gateway
     class AS,US,ES,TS,NS,FE service
     class ADB,UDB,EDB,TDB,NDB database
-```
+Fonctionnalités
+Authentification et autorisation utilisateur
 
+Création et gestion des événements
 
-## Features
+Achat sécurisé de billets
 
-- User authentication and authorization
-- Event creation and management
-- Secure ticket purchasing
-- Automated email notifications after each purchase or cancel
-- Payment processing
-- Ticket validation
-- User purchase history
-- Admin dashboard
+Notifications automatiques par email
 
-## Prerequisites
+Traitement des paiements
 
-- Docker
-- Docker Compose
-- Git
+Validation des billets
 
-## Installation
+Historique d'achats des utilisateurs
 
-1. Clone the repository:
-```bash
+Tableau de bord Admin
+
+Prérequis
+Docker
+
+Docker Compose
+
+Git
+
+Installation
+Clonez le dépôt :
+
+bash
+Copier
+Modifier
 git clone https://github.com/chabbasaad/Events_Microservices &&
 cd laravel_Microservices
-```
+Démarrez les containers :
 
-2. Build and start the containers:
-```bash
+bash
+Copier
+Modifier
 docker-compose up -d
-```
+Exécutez la commande pour les notifications :
 
-3. run command for Queue work for notification
-```bash
+bash
+Copier
+Modifier
 php artisan queue:work
-```
+Comptes Démo
+Admin
 
-## Demo User Accounts
+Email: admin@example.com
 
-The system comes with pre-configured demo accounts for testing purposes:
+Mot de passe: password
 
-1. **Admin User**
-   - Email: admin@example.com
-   - Password: password
-   - Role: Admin
-   - Full system access
+Rôle: Admin
 
-2. **Event Creator**
-   - Email: eventcreator@example.com
-   - Password: password
-   - Role: Event Creator
-   - Can create and manage events
+Créateur d'événements
 
-3. **Operator**
-   - Email: operator@example.com
-   - Password: password
-   - Role: Operator
-   - Can manage tickets and operations
+Email: eventcreator@example.com
 
-4. **Regular User**
-   - Email: user@example.com
-   - Password: password
-   - Role: User
-   - Standard user privileges
+Mot de passe: password
 
+Rôle: Créateur d'événements
 
-## Service URLs
+Opérateur
 
-- Frontend: http://localhost:3000
-- API Gateway: http://localhost:8000
-- Auth Service: http://localhost:8001
-- User Service: http://localhost:8002
-- Event Service: http://localhost:8003
-- Ticket Service: http://localhost:8004
-- Notification Service: http://localhost:8005
+Email: operator@example.com
 
-## API Documentation
+Mot de passe: password
 
-API documentation is available at the following URLs:
-- Auth Service: http://localhost:8001/docs/api
-- User Service: http://localhost:8002/docs/api
-- Event Service: http://localhost:8003/docs/api
-- Ticket Service: http://localhost:8004/docs/api
+Rôle: Opérateur
 
-## Security Features
+Utilisateur
 
-- JWT-based authentication
-- Password encryption
-- Rate limiting
-- CORS protection
-- Database backup scheduling
-- Secure payment processing with Firebase backup (https://appfirebase-f3747-default-rtdb.firebaseio.com/)
-- Daily automated payment backups to Firebase Realtime Database
-- Ticket-user matching for validation
+Email: user@example.com
 
-## Error Handling
+Mot de passe: password
 
-- Comprehensive error logging in each service
-- Asynchronous notification system for failed operations
-- Transaction rollback for failed purchases
-- Automatic retry mechanism for failed notifications
+Rôle: Utilisateur
 
-## Logs
+URLs des Services
+Frontend: http://localhost:3000
 
-- Each service maintains its own logs at `storage/logs/laravel.log`
+API Gateway: http://localhost:8000
 
+Auth Service: http://localhost:8001
 
+User Service: http://localhost:8002
 
-## Laodblancer 
+Event Service: http://localhost:8003
 
-We have set up this NGINX configuration to act as the main entry point (API Gateway) in our microservices architecture. Here’s how it works:
+Ticket Service: http://localhost:8004
 
-Basic Server Configuration:
-Our server listens on port 80.
+Notification Service: http://localhost:8005
 
-We have set the server name to localhost.
+Documentation API
+La documentation est disponible aux URLs suivantes :
 
-Frontend Handling:
-The root route / redirects directly to our frontend service, which runs on port 80.
+Auth Service: http://localhost:8001/docs/api
 
-We have also configured it to forward origin headers (Host, Real-IP, etc.) for better request handling.
+User Service: http://localhost:8002/docs/api
 
-API Gateway Setup:
-All requests sent to /api/ are redirected to our API Gateway service, which runs on port 8000.
+Event Service: http://localhost:8003/docs/api
 
-This central point allows us to manage and dispatch requests to the appropriate services without exposing direct access.
+Ticket Service: http://localhost:8004/docs/api
 
-Direct Access to Services (For Testing & Debugging):
-To facilitate monitoring and testing, we have set up specific routes for direct service access:
-```bash
-/auth/ → auth-service (port 8001)
+Sécurité
+Authentification JWT
 
-/users/ → user-service (port 8002)
+Chiffrement des mots de passe
 
-/events/ → event-service (port 8003)
+Protection CORS
 
-/tickets/ → ticket-service (port 8004)
+Sauvegarde des bases de données
 
-/notifications/ → notification-service (port 8005)
-```
-Load Balancing Mechanism
-Beyond simple request redirection, our configuration also acts as a Load Balancer, efficiently distributing incoming requests to the appropriate services. This helps optimize performance and scalability across our system.
+Traitement sécurisé des paiements avec Firebase
 
-With this setup, we have a structured, high-performance, and easily extensible architecture for our project.
+Gestion des Erreurs
+Journalisation des erreurs
+
+Système de notifications asynchrones pour les opérations échouées
+
+Rétablissement des transactions en cas d'échec
+
+Mécanisme de reprise automatique pour les notifications échouées
+
+Logs
+Chaque service conserve ses logs dans storage/logs/laravel.log
+
+Configuration du Load Balancer (NGINX)
+Redirection des requêtes /api/ vers l'API Gateway
+
+Accès direct pour les tests aux services via les routes /auth/, /users/, /events/, /tickets/, /notifications/
