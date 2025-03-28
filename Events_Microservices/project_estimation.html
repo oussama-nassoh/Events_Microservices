@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimation du Projet - Events Microservices</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .summary {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .feature-group {
+            margin-bottom: 30px;
+        }
+
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .status.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .status.in-progress {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .status.planned {
+            background: var(--secondary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chiffrage du Projet - Events Microservices</h1>
+        
+        <div class="card">
+            <h2>Informations Générales</h2>
+            <p><strong>Date de début :</strong> 13 mars 2025, 16:00</p>
+            <p><strong>Date de fin prévue :</strong> 27 mars 2025, 23:59</p>
+            <p><strong>Durée totale :</strong> 14 jours</p>
+            <p><strong>Taux horaire :</strong> 65€/heure (HT)</p>
+        </div>
+
+        <div class="feature-group">
+            <h2>Services Backend</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Fonctionnalités</th>
+                        <th>Temps Estimé (heures)</th>
+                        <th>Coût Estimé (€)</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Auth Service</td>
+                        <td>
+                            - JWT Authentication<br>
+                            - Role Management<br>
+                            - User Registration/Login<br>
+                            - Password Reset
+                        </td>
+                        <td>24</td>
+                        <td>1,560</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>User Service</td>
+                        <td>
+                            - Profile Management<br>
+                            - User Preferences<br>
+                            - Contact Information
+                        </td>
+                        <td>16</td>
+                        <td>1,040</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>Event Service</td>
+                        <td>
+                            - Event CRUD<br>
+                            - Image Management<br>
+                            - Event Categories<br>
+                            - Search & Filtering
+                        </td>
+                        <td>32</td>
+                        <td>2,080</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ticket Service</td>
+                        <td>
+                            - Ticket Management<br>
+                            - Payment Processing<br>
+                            - Ticket Validation<br>
+                            - Transaction Security
+                        </td>
+                        <td>40</td>
+                        <td>2,600</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>Notification Service</td>
+                        <td>
+                            - Email Notifications<br>
+                            - Real-time Updates<br>
+                            - Template Management
+                        </td>
+                        <td>20</td>
+                        <td>1,300</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="feature-group">
+            <h2>Frontend (Web Application)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Fonctionnalités</th>
+                        <th>Temps Estimé (heures)</th>
+                        <th>Coût Estimé (€)</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Authentication UI</td>
+                        <td>
+                            - Login/Register Forms<br>
+                            - Password Reset<br>
+                            - Profile Management
+                        </td>
+                        <td>16</td>
+                        <td>1,040</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>Event Management</td>
+                        <td>
+                            - Event Creation/Edition<br>
+                            - Image Upload<br>
+                            - Event Dashboard
+                        </td>
+                        <td>24</td>
+                        <td>1,560</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ticket System</td>
+                        <td>
+                            - Ticket Purchase Flow<br>
+                            - Payment Integration<br>
+                            - Ticket Management
+                        </td>
+                        <td>32</td>
+                        <td>2,080</td>
+                        <td><span class="status in-progress">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>User Dashboard</td>
+                        <td>
+                            - Event History<br>
+                            - Ticket Management<br>
+                            - Notifications Center
+                        </td>
+                        <td>20</td>
+                        <td>1,300</td>
+                        <td><span class="status planned">Planifié</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="feature-group">
+            <h2>Infrastructure & DevOps</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tâche</th>
+                        <th>Description</th>
+                        <th>Temps Estimé (heures)</th>
+                        <th>Coût Estimé (€)</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Docker Setup</td>
+                        <td>Configuration des conteneurs et docker-compose</td>
+                        <td>8</td>
+                        <td>520</td>
+                        <td><span class="status completed">Complété</span></td>
+                    </tr>
+                    <tr>
+                        <td>CI/CD</td>
+                        <td>Pipeline d'intégration continue</td>
+                        <td>12</td>
+                        <td>780</td>
+                        <td><span class="status in-progress">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Monitoring</td>
+                        <td>Mise en place des outils de surveillance</td>
+                        <td>16</td>
+                        <td>1,040</td>
+                        <td><span class="status planned">Planifié</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary">
+            <h2>Résumé Financier</h2>
+            <table>
+                <tr>
+                    <td><strong>Total Heures Estimées</strong></td>
+                    <td>260 heures</td>
+                </tr>
+                <tr>
+                    <td><strong>Coût Total (HT)</strong></td>
+                    <td>16,900 €</td>
+                </tr>
+                <tr>
+                    <td><strong>TVA (20%)</strong></td>
+                    <td>3,380 €</td>
+                </tr>
+                <tr>
+                    <td><strong>Coût Total (TTC)</strong></td>
+                    <td>20,280 €</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
